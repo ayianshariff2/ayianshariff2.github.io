@@ -2,12 +2,6 @@
 <html>
 <head>
     <title>My GitHub Pages Site</title>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-    <script type="text/javascript">
-        (function() {
-            emailjs.init(process.env.YOUR_USER_ID); // Replace with your actual User ID during local development
-        })();
-    </script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -28,12 +22,24 @@
         document.getElementById('contactForm').addEventListener('submit', function(event) {
             event.preventDefault();
 
-            emailjs.sendForm(process.env.YOUR_SERVICE_ID, process.env.YOUR_TEMPLATE_ID, this) 
-                .then(function() {
-                    alert('SUCCESS!');
-                }, function(error) {
-                    alert('FAILED...', error);
-                });
+            // Collect the form data
+            const formData = {
+                name: document.querySelector('[name="name"]').value,
+                country: document.querySelector('[name="country"]').value,
+                message: document.querySelector('[name="message"]').value,
+                submittedAt: new Date().toISOString(),  // Record the submission time
+            };
+
+            // Save the form data to localStorage
+            const storedData = JSON.parse(localStorage.getItem('formSubmissions')) || [];
+            storedData.push(formData);
+            localStorage.setItem('formSubmissions', JSON.stringify(storedData));
+
+            // Show success message
+            alert('Form submitted successfully and recorded!');
+
+            // Optionally, clear the form
+            document.getElementById('contactForm').reset();
         });
     </script>
 </body>

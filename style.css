@@ -1,3 +1,16 @@
+body {
+  background-color: lightblue;
+}
+
+h1 {
+  text-align: center;
+}
+
+p {
+  text-align: center;
+}
+
+
 .contact-box {
   width: 300px;
   margin: 20px auto;

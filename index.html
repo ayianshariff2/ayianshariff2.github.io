@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My GitHub Pages Site</title>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -21,25 +23,30 @@
     <script>
         document.getElementById('contactForm').addEventListener('submit', function(event) {
             event.preventDefault();
-
-            // Collect the form data
+    
             const formData = {
                 name: document.querySelector('[name="name"]').value,
                 country: document.querySelector('[name="country"]').value,
                 message: document.querySelector('[name="message"]').value,
-                submittedAt: new Date().toISOString(),  // Record the submission time
+                submittedAt: new Date().toISOString(),  
             };
-
-            // Save the form data to localStorage
-            const storedData = JSON.parse(localStorage.getItem('formSubmissions')) || [];
-            storedData.push(formData);
-            localStorage.setItem('formSubmissions', JSON.stringify(storedData));
-
-            // Show success message
-            alert('Form submitted successfully and recorded!');
-
-            // Optionally, clear the form
-            document.getElementById('contactForm').reset();
+    
+            fetch('http://127.0.0.1:8000/api/messages', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert('Form submitted successfully!');
+                document.getElementById('contactForm').reset();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('There was an error submitting your form.');
+            });
         });
     </script>
 </body>

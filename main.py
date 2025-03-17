@@ -5,14 +5,11 @@ from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
-origins = [
-    "https://ayianshariff2.github.io",
-]
 
 # Add CORSMiddleware to allow cross-origin requests
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,  # You can also use ["*"] to allow all origins, but this is not recommended for production
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -38,7 +35,7 @@ async def submit_message(form_data: FormSubmission):
     return {"message": "Form submitted successfully!", "data": form_data}
 
 
-@app.get("/api/messages")
+@app.get("/api/messagev")
 async def get_messages():
     # Retrieve the stored form submissions
     return form_submissions

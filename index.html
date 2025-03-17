@@ -5,7 +5,7 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script type="text/javascript">
         (function() {
-            emailjs.init("UGD0qJzTsy4jLjgVh"); // Replace with your User ID
+            emailjs.init("YOUR_USER_ID"); // Replace with your User ID
         })();
     </script>
 </head>
@@ -27,7 +27,7 @@
         document.getElementById('contactForm').addEventListener('submit', function(event) {
             event.preventDefault();
 
-            emailjs.sendForm('service_c0zqox1', 'template_m3pfz6i', this)
+            emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', this)
                 .then(function() {
                     alert('SUCCESS!');
                 }, function(error) {

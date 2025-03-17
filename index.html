@@ -2,7 +2,12 @@
 <html>
 <head>
     <title>My GitHub Pages Site</title>
-    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            emailjs.init("UGD0qJzTsy4jLjgVh"); // Replace with your User ID
+        })();
+    </script>
 </head>
 <body>
     <h1>Hello, World!</h1>
@@ -10,7 +15,25 @@
 
     <div class="contact-box">
         <h2>Contact Me</h2>
-        <p>For any inquiries, please email me at: <a href="mailto:ayianshariff@gmail.com">ayianshariff@gmail.com</a></p>
+        <form id="contactForm">
+            <input type="text" name="name" placeholder="Your Name" required><br>
+            <input type="text" name="country" placeholder="Your Country" required><br>
+            <textarea name="message" placeholder="Your Message" required></textarea><br>
+            <button type="submit">Send</button>
+        </form>
     </div>
+
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            emailjs.sendForm('service_c0zqox1', 'template_m3pfz6i', this)
+                .then(function() {
+                    alert('SUCCESS!');
+                }, function(error) {
+                    alert('FAILED...', error);
+                });
+        });
+    </script>
 </body>
 </html>
